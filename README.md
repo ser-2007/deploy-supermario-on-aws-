@@ -205,7 +205,7 @@ deployment.yaml file is like a set of instructions that tells a computer system,
 3. Now create the service
 kubectl apply -f service.yaml
 
-![alt text](././images/images/./images/image-20.png)
+![alt text](./images/image-20.png)
 
 service.yaml file is like a set of rules that helps computers find and talk to each other within a software application. It's like a directory that says, "Hey, this is how you can reach different parts of our application." It specifies how different parts of your application communicate and how other services or users can connect to them.
 4. run → kubectl get all
