@@ -1,6 +1,7 @@
 
 # README.md
 
+![supermario](image.png)
 # Prerequisite →
 	1. Only thing that you need is the aws account and also you need to know some basics of it
 	2. Than we configure Terraform inside an ec2 instance
