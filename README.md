@@ -1,7 +1,9 @@
 
 # README.md
 
-![supermario](image.png)
+![image](https://github.com/ser-2007/deploy-supermario-on-aws-/assets/81197541/b635b075-fe1f-481c-b7f4-a4411a92e42a)
+
+
 # Prerequisite →
 	1. Only thing that you need is the aws account and also you need to know some basics of it
 	2. Than we configure Terraform inside an ec2 instance
