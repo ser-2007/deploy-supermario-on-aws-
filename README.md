@@ -1,7 +1,7 @@
 
 # README.md
 
-![image](https://github.com/ser-2007/deploy-supermario-on-aws-/assets/81197541/b635b075-fe1f-481c-b7f4-a4411a92e42a)
+![./images/image](https://github.com/ser-2007/deploy-supermario-on-aws-/assets/81197541/b635b075-fe1f-481c-b7f4-a4411a92e42a)
 
 
 # Prerequisite →
@@ -22,10 +22,10 @@ Let’s do it
 Step 1 → Login and basics setup
 	1. login into your aws account as a root user
 
-![aws-accoun login](image.png)
+![aws-accoun login](./images/image.png)
 2. Launch an EC2 instance with the following setting
 
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 		
 		
 		
@@ -77,7 +77,7 @@ Why we need IAM role for EC2 → It is used by your ec2 instance to create EKS c
 
 3. click on create role and choose EC2 from the dropdown
 
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 
 
 
@@ -86,10 +86,10 @@ Why we need IAM role for EC2 → It is used by your ec2 instance to create EKS c
 
 4. click on next
 5. choose administrator access on permission sections
-![alt text](image-6.png)
+![alt text](./images/image-6.png)
 6. click on next and give a name to your role
 
-![alt text](image-7.png)
+![alt text](./images/image-7.png)
 
 
 
@@ -106,10 +106,10 @@ Step 4 →Attach IAM role with your EC2
 	1. go to EC2 section
 	2. click on actions → security → modify IAM role option
 
-![alt text](image-8.png)
+![alt text](./images/image-8.png)
 3. choose the role from dropdown and click on update IAM role
 
-![alt text](image-9.png)
+![alt text](./images/image-9.png)
 
 
 why we need IAM Role →
@@ -126,7 +126,7 @@ Step 5 → Building Infrastructure Using terraform
 1. clone the github repo 
 a. mkdir super_mario
 b. cd super_mario
-![alt text](image-10.png)
+![alt text](./images/image-10.png)
 c.Thank you for @Aakibgithuber guidance and explanations during the project phase.
 c. cd Deployment-of-super-Mario-on-Kubernetes-using-terraform/
 
@@ -134,7 +134,7 @@ e. cd EKS-TF
 
 f. edit the backend.tf file by → vim backend.tf
 
-![alt text](image-11.png)
+![alt text](./images/image-11.png)
 
 
 
@@ -146,23 +146,23 @@ NOW RUN →
 	1. terraform init
 
 
-![alt text](image-12.png)
+![alt text](./images/image-12.png)
 
 When we run terraform init, it sets up your working area, downloads necessary plugins, and makes sure everything is in place so that you can start using Terraform to create, update, or manage your infrastructure. It's like getting all the tools and materials ready before you start building something amazing with your computer.
 2. terraform validate
 
 
-![alt text](image-13.png)
+![alt text](./images/image-13.png)
 
 
 3-terraform plan
 
 Terraform plan is used to see what changes will be made to your infrastructure. By using this command we could review and confirm that everything looks good before giving the final approval to build or modify our application infrasructure It is like the blueprint of the construction project before actually creating or changing anything with Terraform
 
-![alt text](image-14.png)
+![alt text](./images/image-14.png)
 
 
-![alt text](image-15.png)
+![alt text](./images/image-15.png)
 
 
 
@@ -170,7 +170,7 @@ Terraform plan is used to see what changes will be made to your infrastructure. 
 terraform apply --auto-approve
 Running terraform apply --auto-approve is like telling computer, "Go ahead and build everything exactly as planned without asking me for confirmation each time." It's a way to automate the deployment of your infrastructure without needing our constant input. When we execute this command, Terraform reads our code, figures out what needs to be created or changed, and then goes ahead with the construction, skipping the usual step where it checks with you for approval.
 
-![alt text](image-16.png)
+![alt text](./images/image-16.png)
 
 
 
@@ -181,11 +181,11 @@ aws eks update-kubeconfig --name EKS_CLOUD --region eu-north-1
 
 The command aws eks update-kubeconfig --name EKS_CLOUD --region us-east-1 is like telling our computer, "Hey, I'm using Amazon EKS (Elastic Kubernetes Service) in the 'us-east-1' region, and I want to connect to it. you could use your desired location
 
-![alt text](image-17.png)
+![alt text](./images/image-17.png)
 
 
 
-![alt text](image-18.png)
+![alt text](./images/image-18.png)
 
 
 
@@ -197,7 +197,7 @@ Step 6 → Creation of deployment and service for EKS
 kubectl apply -f deployment.yaml 
 
 
-![alt text](image-19.png)
+![alt text](./images/image-19.png)
 
 
 
@@ -205,12 +205,12 @@ deployment.yaml file is like a set of instructions that tells a computer system,
 3. Now create the service
 kubectl apply -f service.yaml
 
-![alt text](image-20.png)
+![alt text](././images/images/./images/image-20.png)
 
 service.yaml file is like a set of rules that helps computers find and talk to each other within a software application. It's like a directory that says, "Hey, this is how you can reach different parts of our application." It specifies how different parts of your application communicate and how other services or users can connect to them.
 4. run → kubectl get all
 
-![alt text](image-21.png)
+![alt text](./images/image-21.png)
 
 
 5. now Run the follwing command to get the load balancer ingress
@@ -218,11 +218,11 @@ This command tells all the details of your application
 kubectl describe service mario-service
 
 
-![alt text](image-22.png)
+![alt text](./images/image-22.png)
 
 
 
-![alt text](image-23.png)
+![alt text](./images/image-23.png)
 
 
 Play and Enjoy but don’t forget to destroy everything that’s saves of aws bill and you aws account too
