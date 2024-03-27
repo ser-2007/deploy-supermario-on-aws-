@@ -1,0 +1,87 @@
+name: AWS EC2 CI/CD
+
+on:
+  #push:
+   # branches:
+  #    - main
+  workflow_dispatch:  # Manuel tetikleme için workflow_dispatch etkinliğini kullanır
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Connect to AWS EC2
+        run: |
+            ssh -i /path/to/private/key.pem ec2-user@your-ec2-public-ip
+
+      - name: Create IAM role for EC2
+        run: |
+          echo "Please follow the instructions in the README to create an IAM role for EC2"
+
+      - name: Attach IAM role with EC2
+        run: |
+          echo "Please follow the instructions in the README to attach IAM role with EC2"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install unzip -y
+          sudo apt-get install docker.io -y
+          sudo apt-get install wget -y
+          sudo apt-get install curl -y
+          curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+          wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg — dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg 
+          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+          sudo apt update && sudo apt install terraform -y
+
+
+      - name: Clone GitHub repo
+        run: git clone https://github.com/yourusername/super_mario.git
+
+      - name: Change directory
+        run: cd super_mario/Deployment-of-super-Mario-on-Kubernetes-using-terraform/EKS-TF/
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Validate Terraform configuration
+        run: terraform validate
+
+      - name: Plan Terraform deployment
+        run: terraform plan
+
+      - name: Apply Terraform deployment
+        run: terraform apply --auto-approve
+
+      - name: Update Kubernetes configuration
+        run: aws eks update-kubeconfig --name EKS_CLOUD --region eu-north-1
+
+      - name: Deploy application
+        run: |
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+
+      - name: Get all Kubernetes resources
+        run: kubectl get all
+
+      - name: Describe service
+        run: kubectl describe service mario-service
+
+      - name: Cleanup
+        run: |
+          kubectl delete service mario-service
+          kubectl delete deployment mario-deployment
+          terraform destroy --auto-approve
